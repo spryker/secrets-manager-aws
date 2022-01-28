@@ -28,7 +28,7 @@ class SecretsManagerAwsToUtilTextServiceBridge implements SecretsManagerAwsToUti
      *
      * @return string
      */
-    public function hashValue($value, $algorithm): string
+    public function hashValue($value, string $algorithm): string
     {
         return $this->utilTextService->hashValue($value, $algorithm);
     }
