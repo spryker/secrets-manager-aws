@@ -9,12 +9,12 @@ namespace Spryker\Client\SecretsManagerAws\Plugin\SecretsManager;
 
 use Generated\Shared\Transfer\SecretTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
-use Spryker\Client\SecretsManagerExtension\Dependency\Plugin\SecretsManagerClientPluginInterface;
+use Spryker\Client\SecretsManagerExtension\Dependency\Plugin\SecretsManagerProviderPluginInterface;
 
 /**
  * @method \Spryker\Client\SecretsManagerAws\SecretsManagerAwsClientInterface getClient()
  */
-class SecretsManagerAwsClientPlugin extends AbstractPlugin implements SecretsManagerClientPluginInterface
+class SecretsManagerAwsProviderPlugin extends AbstractPlugin implements SecretsManagerProviderPluginInterface
 {
     /**
      * {@inheritDoc}

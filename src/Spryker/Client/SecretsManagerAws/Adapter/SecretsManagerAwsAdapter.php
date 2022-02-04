@@ -59,7 +59,7 @@ class SecretsManagerAwsAdapter implements SecretsManagerAwsAdapterInterface
 
         $createSecretRequestBody = [
             'Name' => $this->secretGenerator->generateName($secretTransfer->getSecretKeyOrFail()),
-            'SecretString' => $secretTransfer->getValue(),
+            'SecretString' => $secretTransfer->getValueOrFail(),
         ];
 
         if (count($secretTransfer->getSecretTags()) > 0) {

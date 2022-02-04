@@ -13,6 +13,11 @@ use Spryker\Shared\SecretsManagerAws\SecretsManagerAwsConstants;
 class SecretsManagerAwsConfig extends AbstractBundleConfig
 {
     /**
+     * @var string
+     */
+    protected const SECRETS_MANAGER_AWS_VERSION = '2017-10-17';
+
+    /**
      * @api
      *
      * @return string
@@ -59,6 +64,6 @@ class SecretsManagerAwsConfig extends AbstractBundleConfig
      */
     public function getSecretsManagerAwsVersion(): string
     {
-        return $this->get(SecretsManagerAwsConstants::SECRETS_MANAGER_AWS_VERSION, '');
+        return static::SECRETS_MANAGER_AWS_VERSION;
     }
 }

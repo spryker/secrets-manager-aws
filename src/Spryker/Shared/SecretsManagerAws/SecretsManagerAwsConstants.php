@@ -51,14 +51,4 @@ interface SecretsManagerAwsConstants
      * @var string
      */
     public const SECRETS_MANAGER_AWS_ENDPOINT = 'SECRETS_MANAGER_AWS:SECRETS_MANAGER_AWS_ENDPOINT';
-
-    /**
-     * Specification:
-     * - Defines AWS Secrets Manager API version.
-     *
-     * @api
-     *
-     * @var string
-     */
-    public const SECRETS_MANAGER_AWS_VERSION = 'SECRETS_MANAGER_AWS:SECRETS_MANAGER_AWS_VERSION';
 }

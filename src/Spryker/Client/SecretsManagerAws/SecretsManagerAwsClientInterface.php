@@ -33,7 +33,7 @@ interface SecretsManagerAwsClientInterface
      * - Requires `Secret.secretKey.identifier` to be set.
      * - Requires `Secret.secretKey.prefix` to be set.
      * - Generates AWS secret name using `Secret.secretKey`.
-     * - Nullify `Secret.value` property.
+     * - Nullifies `Secret.value` property.
      * - Calls the AWS Secrets Manager client method to retrieve a secret value.
      * - Logs the client error, if any.
      * - Fill `Secret.value` property with the secret value.
