@@ -42,9 +42,11 @@ class SecretsManagerAwsConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getSecretsManagerAwsEndpoint(): string
+    public function getSecretsManagerAwsEndpoint(): ?string
     {
-        return $this->get(SecretsManagerAwsConstants::SECRETS_MANAGER_AWS_ENDPOINT, '');
+        $secretsManagerAwsEndpoint = $this->get(SecretsManagerAwsConstants::SECRETS_MANAGER_AWS_ENDPOINT, '');
+
+        return !empty($secretsManagerAwsEndpoint) ? $secretsManagerAwsEndpoint : null;
     }
 
     /**
