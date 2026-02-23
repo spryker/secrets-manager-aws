@@ -7,9 +7,11 @@
 
 namespace SprykerTest\Client\SecretsManagerAws;
 
+use Aws\Command;
 use Aws\Exception\AwsException;
 use Aws\Result;
 use Aws\SecretsManager\SecretsManagerClient;
+use BadMethodCallException;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\SecretKeyTransfer;
 use Generated\Shared\Transfer\SecretTagTransfer;
@@ -79,9 +81,14 @@ class SecretsManagerAwsClientTest extends Unit
 
         // Assert
         $secretsManagerClientMock->expects($this->once())
-            ->method('createSecret')
-            ->with($requestConstraint)
-            ->willReturn(new Result([]));
+            ->method('__call')
+            ->willReturnCallback(function ($methodName, $arguments) {
+                if ($methodName === 'createSecret') {
+                    return new Result([]);
+                }
+
+                throw new BadMethodCallException("Unexpected method call: $methodName");
+            });
 
         // Act
         $isSuccessful = $this->tester->getClient()->createSecret($secretTransfer);
@@ -103,8 +110,14 @@ class SecretsManagerAwsClientTest extends Unit
         $loggerMock->expects($this->once())
             ->method('error');
         $secretsManagerClientMock->expects($this->once())
-            ->method('createSecret')
-            ->willThrowException($this->createMock(AwsException::class));
+            ->method('__call')
+            ->willReturnCallback(function ($methodName, $arguments) {
+                if ($methodName === 'createSecret') {
+                    throw new AwsException('error', new Command('createSecret'));
+                }
+
+                throw new BadMethodCallException("Unexpected method call: $methodName");
+            });
 
         // Act
         $isSuccessful = $this->tester->getClient()->createSecret($secretTransfer);
@@ -143,9 +156,16 @@ class SecretsManagerAwsClientTest extends Unit
 
         // Assert
         $secretsManagerClientMock->expects($this->once())
-            ->method('getSecretValue')
-            ->with($this->arrayHasKey('SecretId'))
-            ->willReturn(new Result(['SecretString' => $secretValue]));
+            ->method('__call')
+            ->willReturnCallback(function ($methodName, $arguments) use ($secretValue) {
+                if ($methodName === 'getSecretValue') {
+                    $this->assertArrayHasKey('SecretId', $arguments[0]);
+
+                    return new Result(['SecretString' => $secretValue]);
+                }
+
+                throw new BadMethodCallException("Unexpected method call: $methodName");
+            });
 
         // Act
         $secretTransfer = $this->tester->getClient()->getSecret($secretTransfer);
@@ -167,8 +187,14 @@ class SecretsManagerAwsClientTest extends Unit
         $loggerMock->expects($this->once())
             ->method('error');
         $secretsManagerClientMock->expects($this->once())
-            ->method('getSecretValue')
-            ->willThrowException($this->createMock(AwsException::class));
+            ->method('__call')
+            ->willReturnCallback(function ($methodName, $arguments) {
+                if ($methodName === 'getSecretValue') {
+                    throw new AwsException('error', new Command('getSecretValue'));
+                }
+
+                throw new BadMethodCallException("Unexpected method call: $methodName");
+            });
 
         // Act
         $secretTransfer = $this->tester->getClient()->getSecret($secretTransfer);
@@ -296,7 +322,6 @@ class SecretsManagerAwsClientTest extends Unit
     {
         $secretsManagerClientMock = $this->getMockBuilder(SecretsManagerClient::class)
             ->disableOriginalConstructor()
-            ->addMethods(['createSecret', 'getSecretValue'])
             ->getMock();
         $this->tester->setDependency(
             SecretsManagerAwsDependencyProvider::CLIENT_SECRETS_MANAGER_AWS,
