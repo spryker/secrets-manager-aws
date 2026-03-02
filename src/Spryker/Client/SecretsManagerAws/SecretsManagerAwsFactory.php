@@ -17,9 +17,6 @@ use Spryker\Client\SecretsManagerAws\Generator\SecretGeneratorInterface;
 
 class SecretsManagerAwsFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Client\SecretsManagerAws\Adapter\SecretsManagerAwsAdapterInterface
-     */
     public function createSecretsManagerAwsAdapter(): SecretsManagerAwsAdapterInterface
     {
         return new SecretsManagerAwsAdapter(
@@ -28,25 +25,16 @@ class SecretsManagerAwsFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\SecretsManagerAws\Generator\SecretGeneratorInterface
-     */
     public function createSecretGenerator(): SecretGeneratorInterface
     {
         return new SecretGenerator($this->getUtilTextService());
     }
 
-    /**
-     * @return \Aws\SecretsManager\SecretsManagerClient
-     */
     public function getSecretsManagerAwsClient(): SecretsManagerClient
     {
         return $this->getProvidedDependency(SecretsManagerAwsDependencyProvider::CLIENT_SECRETS_MANAGER_AWS);
     }
 
-    /**
-     * @return \Spryker\Client\SecretsManagerAws\Dependency\Service\SecretsManagerAwsToUtilTextServiceInterface
-     */
     public function getUtilTextService(): SecretsManagerAwsToUtilTextServiceInterface
     {
         return $this->getProvidedDependency(SecretsManagerAwsDependencyProvider::SERVICE_UTIL_TEXT);

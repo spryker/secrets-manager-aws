@@ -95,9 +95,6 @@ class SecretsManagerAwsClientTest extends Unit
         $this->assertTrue($isSuccessful);
     }
 
-    /**
-     * @return void
-     */
     public function testCreateSecretLogsErrorWithExceptionalResponse(): void
     {
         // Arrange
@@ -144,9 +141,6 @@ class SecretsManagerAwsClientTest extends Unit
         $this->tester->getClient()->createSecret($secretTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testGetSecretReturnsSecretValueWithSuccessfulResponse(): void
     {
         // Arrange
@@ -172,9 +166,6 @@ class SecretsManagerAwsClientTest extends Unit
         $this->assertSame($secretValue, $secretTransfer->getValue());
     }
 
-    /**
-     * @return void
-     */
     public function testGetSecretReturnsNoSecretValueAndLogsErrorWithExceptionalResponse(): void
     {
         // Arrange
@@ -331,11 +322,6 @@ class SecretsManagerAwsClientTest extends Unit
         return $secretsManagerClientMock;
     }
 
-    /**
-     * @param \Psr\Log\LoggerInterface $loggerMock
-     *
-     * @return void
-     */
     protected function mockSecretsManagerAwsAdapterWithLogger(LoggerInterface $loggerMock): void
     {
         $secretsManagerAwsFactory = $this->tester->getFactory();

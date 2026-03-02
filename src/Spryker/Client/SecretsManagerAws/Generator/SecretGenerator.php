@@ -17,19 +17,11 @@ class SecretGenerator implements SecretGeneratorInterface
      */
     protected $utilTextService;
 
-    /**
-     * @param \Spryker\Client\SecretsManagerAws\Dependency\Service\SecretsManagerAwsToUtilTextServiceInterface $utilTextService
-     */
     public function __construct(SecretsManagerAwsToUtilTextServiceInterface $utilTextService)
     {
         $this->utilTextService = $utilTextService;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\SecretKeyTransfer $secretKeyTransfer
-     *
-     * @return string
-     */
     public function generateName(SecretKeyTransfer $secretKeyTransfer): string
     {
         return sprintf(

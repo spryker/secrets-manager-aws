@@ -32,10 +32,6 @@ class SecretsManagerAwsAdapter implements SecretsManagerAwsAdapterInterface
      */
     protected $secretGenerator;
 
-    /**
-     * @param \Aws\SecretsManager\SecretsManagerClient $secretsManagerAwsClient
-     * @param \Spryker\Client\SecretsManagerAws\Generator\SecretGeneratorInterface $secretGenerator
-     */
     public function __construct(
         SecretsManagerClient $secretsManagerAwsClient,
         SecretGeneratorInterface $secretGenerator
@@ -44,11 +40,6 @@ class SecretsManagerAwsAdapter implements SecretsManagerAwsAdapterInterface
         $this->secretGenerator = $secretGenerator;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\SecretTransfer $secretTransfer
-     *
-     * @return bool
-     */
     public function createSecret(SecretTransfer $secretTransfer): bool
     {
         $secretTransfer->requireValue()
@@ -82,11 +73,6 @@ class SecretsManagerAwsAdapter implements SecretsManagerAwsAdapterInterface
         return true;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\SecretTransfer $secretTransfer
-     *
-     * @return \Generated\Shared\Transfer\SecretTransfer
-     */
     public function getSecret(SecretTransfer $secretTransfer): SecretTransfer
     {
         $secretTransfer->requireSecretKey()

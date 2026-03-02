@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\SecretKeyTransfer;
 
 interface SecretGeneratorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\SecretKeyTransfer $secretKeyTransfer
-     *
-     * @return string
-     */
     public function generateName(SecretKeyTransfer $secretKeyTransfer): string;
 }
