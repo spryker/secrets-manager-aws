@@ -56,8 +56,8 @@ class SecretsManagerAwsAdapter implements SecretsManagerAwsAdapterInterface
         if (count($secretTransfer->getSecretTags()) > 0) {
             foreach ($secretTransfer->getSecretTags() as $secretTagTransfer) {
                 $createSecretRequestBody['Tags'][] = [
-                    'Key' => $secretTagTransfer->getKey(),
-                    'Value' => $secretTagTransfer->getValue(),
+                    'Key' => $secretTagTransfer->getKeyOrFail(),
+                    'Value' => $secretTagTransfer->getValueOrFail(),
                 ];
             }
         }
